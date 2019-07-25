@@ -1,6 +1,7 @@
 import wikipediaapi
 from googlesearch import search 
 import csv
+import re
 
 #load name, birth year from file
 
@@ -16,7 +17,20 @@ with open('standardinput.csv') as csv_file:
         	years.append(row[1])
         line_count += 1
 
-#google search name + birth year + wiki 
+
+#google search name + birth year + wiki
+candidates = []
+for num in range(len(names)):
+    query = names[num]  + years[num] + " Wikipedia"
+    for j in search(query, num=1, stop=1, pause=2):
+        candidates.append(j)
+
+print(candidates)
+
+#use a regular expression to get everything after /wiki/
+#use the wikipedia api to check if it is the right person
+
+
 
 wiki_wiki = wikipediaapi.Wikipedia(
         language='en',
