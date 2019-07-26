@@ -25,9 +25,14 @@ for num in range(len(names)):
     for j in search(query, num=1, stop=1, pause=2):
         candidates.append(j)
 
-print(candidates)
+#obtains the titles of articles
+titles = []
+for url in candidates:
+    titles.append(url[30: ])
 
+print(titles)
 #use a regular expression to get everything after /wiki/
+#actually probably don't need a regular expression, since start of wikipedia url is always the same
 #use the wikipedia api to check if it is the right person
 
 
@@ -38,8 +43,12 @@ wiki_wiki = wikipediaapi.Wikipedia(
 )
 page_py = wiki_wiki.page('Philby')
 print(page_py.text)
+print(len("https://en.wikipedia.org/wiki/"))
 
 #check if it is the birth year
+#do this by checking if it is in the category "year births"
+#check yale using "Yale University Alumni" maybe
+#if it isn't check for the existence of a disambiguation page
 
 #write to file as CSV
 #add description to CSV?
