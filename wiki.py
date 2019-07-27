@@ -27,23 +27,27 @@ for num in range(len(names)):
 
 #obtains the titles of articles
 titles = []
-for url in candidates:
-    titles.append(url[30: ])
-
-print(titles)
-#use a regular expression to get everything after /wiki/
-#actually probably don't need a regular expression, since start of wikipedia url is always the same
+corresponding_years = []
+for num in range(len(candidates)):
+    if candidates[num][0:30] == "https://en.wikipedia.org/wiki/":
+        titles.append(candidates[num][30: ])
+        corresponding_years.append(years[num])
 #use the wikipedia api to check if it is the right person
-
-
+#need to keep track of the year here, make a separate array?
 
 wiki_wiki = wikipediaapi.Wikipedia(
         language='en',
         extract_format=wikipediaapi.ExtractFormat.WIKI
 )
+
+#gets categories
+for title in titles:
+    page = wiki_wiki.page(title)
+    #categories = page.categories()
+
+
 page_py = wiki_wiki.page('Philby')
 print(page_py.text)
-print(len("https://en.wikipedia.org/wiki/"))
 
 #check if it is the birth year
 #do this by checking if it is in the category "year births"
