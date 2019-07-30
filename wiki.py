@@ -9,11 +9,19 @@ import re
 #if it matches birth year, add an array containg name (as originally given), birth year, URL, first sentence of wikipedia article to final results
 #write to output file
 
+#need to be careful when adding people who went to yale
+#check if the person was born in a different year
+
 
 #load name, birth year from file
 names = []
 years = []
 titles_to_names = {}
+final_names = []
+final_pages = []
+final_years = []
+final_summary = []
+final = [final_names, final_pages, final_years, final_summary]
 
 with open('standardinput.csv') as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=',')
@@ -59,17 +67,26 @@ for num in range(len(titles)):
     #print_categories(wiki_page)
     #print(type(wiki_page))
     cats = wiki_page.categories
-    string = 'Category:' + corresponding_years[num] + ' births'
+    string = 'Category:' + corresponding_years[num].strip() + ' births'
     if string in cats:
-        print(titles[num])
+        #adds the information to final
+        link = 'https://en.wikipedia.org/wiki/' + titles[num]
+        final_pages.append(link)
+        final_names.append(titles_to_names[link])
+        final_years.append(corresponding_years[num])
+        final_summary.append(wiki_page.summary[0:100])
     else:
         query = titles_to_names["https://en.wikipedia.org/wiki/" + titles[num]]  + " Wikipedia disambiguation"
+        #todo
 
-
-
-
-page_py = wiki_wiki.page('Philby')
-print(page_py.text)
+#writies csv file
+f = open("output.csv", "w")
+f.seek(0)
+f.truncate()
+f_writer = csv.writer(f, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+f_writer.writerow([' Name', ' Page ', ' Year ', ' Description '])
+for person in range(len(final_names)):
+    f_writer.writerow([final_names[person], final_pages[person], final_years[person], final_summary[person]])
 
 #check if it is the birth year
 #do this by checking if it is in the category "year births"
