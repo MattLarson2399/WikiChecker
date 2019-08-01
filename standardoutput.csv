@@ -1,3 +1,3 @@
-"Name", Page, Year
-"Obama, Barack", https://en.wikipedia.org/wiki/Barack_Obama, 1961
-"Finegold, Ben", https://en.wikipedia.org/wiki/Ben_Finegold, 1969
+ Name, Page , Year , Description 
+"Obama, Barack",https://en.wikipedia.org/wiki/Barack_Obama, 1961,"Barack Hussein Obama II ( (listen); born August 4, 1961) is an American attorney and politician who served as the 44th president of the United States from 2009 to 2017"
+"Finegold, Ben",https://en.wikipedia.org/wiki/Ben_Finegold, 1969,"Benjamin Philip Finegold (born September 6, 1969 in Detroit, Michigan) is an American chess grandmaster"

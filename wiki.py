@@ -74,7 +74,9 @@ for num in range(len(titles)):
         final_pages.append(link)
         final_names.append(titles_to_names[link])
         final_years.append(corresponding_years[num])
-        final_summary.append(wiki_page.summary[0:100])
+        sum = wiki_page.summary
+        first_period = sum.find('.')
+        final_summary.append(sum[0:first_period])
     else:
         query = titles_to_names["https://en.wikipedia.org/wiki/" + titles[num]]  + " Wikipedia disambiguation"
         #todo
